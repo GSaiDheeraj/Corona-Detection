@@ -5,5 +5,6 @@ Jinja2==2.10.1
 MarkupSafe==1.1.1
 Werkzeug==0.15.5
 Pillow>=5.4.0
-tensorflow==1.12.0
+tensorfloW
+keras
 numpy==1.19.2
