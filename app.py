@@ -48,7 +48,7 @@ def api(full_path):
 # procesing uploaded file and predict it
 @app.route('/upload', methods=['POST','GET'])
 def upload_file():
-    with graph.as_default():
+#     with graph.as_default():
 
     if request.method == 'GET':
         return render_template('index.html')
