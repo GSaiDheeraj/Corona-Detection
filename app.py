@@ -31,22 +31,18 @@ UPLOAD_FOLDER = 'uploads'
 STATIC_FOLDER = 'static'
 #from keras.models import load_model
 
-global graph
-graph = tf.get_default_graph()
+# global graph
+# graph = tf.get_default_graph()
 model =load_model('Covid_model.h5')
 
 # call model to predict an image
 def api(full_path):
-    with graph.as_default():
-
-        data = tensorflow.keras.preprocessing.image.load_img(full_path, target_size=(224, 224, 3))
-        #print(data.shape)
-        data = np.expand_dims(data, axis=0)
-        data = data/ 255
-
-        #with graph.as_default():
-        predicted = model.predict(data)
-        return predicted
+#     with graph.as_default():
+    data = tensorflow.keras.preprocessing.image.load_img(full_path, target_size=(224, 224, 3))
+    data = np.expand_dims(data, axis=0)
+    data = data/ 255
+    predicted = model.predict(data)
+    return predicted
 
 
 # procesing uploaded file and predict it
@@ -54,10 +50,10 @@ def api(full_path):
 def upload_file():
     with graph.as_default():
 
-        if request.method == 'GET':
-            return render_template('index.html')
-        else:
-            # try:
+    if request.method == 'GET':
+        return render_template('index.html')
+    else:
+        try:
             file = request.files['image']
             full_name = os.path.join(UPLOAD_FOLDER, file.filename)
             file.save(full_name)
@@ -70,9 +66,9 @@ def upload_file():
             label = indices[predicted_class]
 
             return render_template('predict.html', image_file_name = file.filename, label = label, accuracy = accuracy)
-        # except :
-        #     flash("Please select the image first !!", "danger")
-        #     return redirect(url_for("corona"))
+        except :
+            flash("Please select the image first !!", "danger")
+            return redirect(url_for("corona"))
 
 
 @app.route('/uploads/<filename>')
