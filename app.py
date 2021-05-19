@@ -39,6 +39,7 @@ model = load_model('Covid_model.h5')
 
 
 def api(full_path):
+    #with graph.as_default():
     data = tensorflow.keras.preprocessing.image.load_img(full_path, target_size=(224, 224, 3))
     #print(data.shape)
     data = np.expand_dims(data, axis=0)
@@ -53,7 +54,7 @@ def api(full_path):
 	
 @app.route('/upload', methods=['POST','GET'])
 def upload_file():
-
+    #with graph.as_default():
     if request.method == 'GET':
         return render_template('index.html')
     else:
