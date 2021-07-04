@@ -69,12 +69,13 @@ def upload_file():
             predicted_class = np.asscalar(np.argmax(result, axis=1))
             accuracy = round(result[0][predicted_class] * 100, 2)
             label = indices[predicted_class]
-	    if accuracy < 85:
+            if accuracy < 85:
                 prediction = "Please, Check with the Doctor."
             else:
                 prediction = "Result is accurate"
 
-            return render_template('predict.html', image_file_name = file.filename, label = label, accuracy = accuracy, prediction=prediction)
+            return render_template('index.html', image_file_name=file.filename, label=label, accuracy=accuracy,
+                                   prediction=prediction)
         except :
             flash("Please select the image first !!", "danger")      
             return redirect(url_for("corona"))
