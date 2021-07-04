@@ -74,7 +74,7 @@ def upload_file():
             else:
                 prediction = "Result is accurate"
 
-            return render_template('index.html', image_file_name=file.filename, label=label, accuracy=accuracy,
+            return render_template('predict.html', image_file_name=file.filename, label=label, accuracy=accuracy,
                                    prediction=prediction)
         except :
             flash("Please select the image first !!", "danger")      
